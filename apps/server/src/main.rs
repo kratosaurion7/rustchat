@@ -5,6 +5,8 @@ use std::io::Read;
 use std::io::{BufReader, BufRead};
 use std::iter::Iterator;
 
+mod server;
+
 enum MessageType {
     HELLO,
     VERSION,
@@ -94,6 +96,9 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() {
+
+	let chat_serv = server::ChatServer::create();
+
     let mut clients = Vec::<TcpStream>::new();
 
     let listener = TcpListener::bind("127.0.0.1:2222").expect("Could not bind to address.");
